@@ -34,14 +34,18 @@ public class TestHashMap {
 //        Thread.sleep(1000);
 //        System.out.println(map.size());
         //Map<Object, Object> map = new HashMap<>();
-        //Map<Object, Object> map = Collections.synchronizedMap(new HashMap<>());
-        Map<Object, Object> map = new ConcurrentHashMap<>();
-        for(int i = 1;i <= 100; i++){
-            new Thread(()->{
-                map.put(Thread.currentThread().getName(), UUID.randomUUID().toString().substring(0,8));
-                System.out.println(map);
-            },String.valueOf(i)).start();
-        }
+//        //Map<Object, Object> map = Collections.synchronizedMap(new HashMap<>());
+//        Map<Object, Object> map = new ConcurrentHashMap<>();
+//        for(int i = 1;i <= 100; i++){
+//            new Thread(()->{
+//                map.put(Thread.currentThread().getName(), UUID.randomUUID().toString().substring(0,8));
+//                System.out.println(map);
+//            },String.valueOf(i)).start();
+//        }
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("a","b");
+        hashMap.put("b","c");
+
     }
 }
 
