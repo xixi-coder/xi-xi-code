@@ -4,9 +4,12 @@ package com.example.xixi.juc;
  * @author : xi-xi
  */
 class Singleton {
+
     private volatile static Singleton instance;
+
     private Singleton() {
     }
+
     public static Singleton getInstance() {
         //避免一些线程直接去争抢锁达到阻塞状态，导致线程从用户态到内核态转换对于资源的消耗
         if (instance == null) {

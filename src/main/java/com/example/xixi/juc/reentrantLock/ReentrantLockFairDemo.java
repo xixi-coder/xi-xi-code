@@ -8,10 +8,10 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 
 
-public class ReentrantLockDemo {
+public class ReentrantLockFairDemo {
     public static void main(String[] args) {
-        Lock lock = new ReentrantLock();
-
+        Lock lock = new ReentrantLock(true);
+        lock.unlock();
         AQSThread t1 = new AQSThread("t1", lock);
         AQSThread t2 = new AQSThread("t2", lock);
         t1.start();

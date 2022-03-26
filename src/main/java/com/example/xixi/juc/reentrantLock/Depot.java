@@ -34,7 +34,7 @@ public class Depot {
                 int inc = (left + size) > capacity ? (capacity - size) : left;
                 left -= inc;
                 size += inc;
-                System.out.println("produce = " + inc + ", size = " + size);
+                System.out.println(Thread.currentThread()+" produce = " + inc + ", size = " + size);
                 emptyCondition.signal();
             }
         } catch (InterruptedException e) {
@@ -57,7 +57,7 @@ public class Depot {
                 int dec = (size - left) > 0 ? left : size;
                 left -= dec;
                 size -= dec;
-                System.out.println("consume = " + dec + ", size = " + size);
+                System.out.println(Thread.currentThread()+" consume = " + dec + ", size = " + size);
                 fullCondition.signal();
             }
         } catch (InterruptedException e) {

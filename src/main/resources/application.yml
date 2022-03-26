@@ -1,0 +1,11 @@
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.63.38.186:3306/trantor_h3c_prod?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+    username: h3cmall_prod1
+    password: HT5L2_h5x9M1BR1g32
