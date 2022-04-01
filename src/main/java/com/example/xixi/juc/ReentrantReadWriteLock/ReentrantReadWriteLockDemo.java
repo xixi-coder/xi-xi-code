@@ -7,7 +7,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author : xi-xi
  */
-@Slf4j(topic = "ReentrantReadWriteLockDemo")
 public class ReentrantReadWriteLockDemo {
 
 
@@ -21,6 +20,7 @@ public class ReentrantReadWriteLockDemo {
 //        wt1.start();
     }
 }
+@Slf4j
 class ReadThread extends Thread {
     private ReentrantReadWriteLock rrwLock;
 
@@ -30,20 +30,21 @@ class ReadThread extends Thread {
     }
 
     public void run() {
-        System.out.println(Thread.currentThread().getName() + " trying to lock");
+        log.info(Thread.currentThread().getName() + " trying to lock");
         try {
             rrwLock.readLock();
             rrwLock.readLock().lock();
-            System.out.println(Thread.currentThread().getName() + " lock successfully");
+            log.info(Thread.currentThread().getName() + " lock successfully");
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             rrwLock.readLock().unlock();
-            System.out.println(Thread.currentThread().getName() + " unlock successfully");
+            log.info(Thread.currentThread().getName() + " unlock successfully");
         }
     }
 }
+@Slf4j
 class WriteThread extends Thread {
     private ReentrantReadWriteLock rrwLock;
 
@@ -53,13 +54,13 @@ class WriteThread extends Thread {
     }
 
     public void run() {
-        System.out.println(Thread.currentThread().getName() + " trying to lock");
+        log.info(Thread.currentThread().getName() + " trying to lock");
         try {
             rrwLock.writeLock().lock();
-            System.out.println(Thread.currentThread().getName() + " lock successfully");
+            log.info(Thread.currentThread().getName() + " lock successfully");
         } finally {
             rrwLock.writeLock().unlock();
-            System.out.println(Thread.currentThread().getName() + " unlock successfully");
+            log.info(Thread.currentThread().getName() + " unlock successfully");
         }
     }
 }
