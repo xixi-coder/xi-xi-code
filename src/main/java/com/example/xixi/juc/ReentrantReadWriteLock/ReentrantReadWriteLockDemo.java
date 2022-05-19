@@ -7,19 +7,31 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author : xi-xi
  */
+@Slf4j
 public class ReentrantReadWriteLockDemo {
 
 
     public static void main(String[] args) {
-        ReentrantReadWriteLock rrwLock = new ReentrantReadWriteLock(true);
+        ReentrantReadWriteLock rrwLock = new ReentrantReadWriteLock(false);
         ReadThread rt1 = new ReadThread("rt1", rrwLock);
-        ReadThread rt2 = new ReadThread("rt2", rrwLock);
-//        WriteThread wt1 = new WriteThread("wt1", rrwLock);
+        new Thread(() -> {
+            rrwLock.writeLock().lock();
+            log.info(Thread.currentThread().getName() + " trying to write lock");
+            try {
+                Thread.sleep(1000);
+                rrwLock.readLock().lock();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        },"t0001").start();
+//        ReadThread rt2 = new ReadThread("rt2", rrwLock);
+        WriteThread wt1 = new WriteThread("wt1", rrwLock);
         rt1.start();
-        rt2.start();
-//        wt1.start();
+//        rt2.start();
+        wt1.start();
     }
 }
+
 @Slf4j
 class ReadThread extends Thread {
     private ReentrantReadWriteLock rrwLock;
@@ -29,6 +41,7 @@ class ReadThread extends Thread {
         this.rrwLock = rrwLock;
     }
 
+    @Override
     public void run() {
         log.info(Thread.currentThread().getName() + " trying to lock");
         try {
@@ -44,6 +57,7 @@ class ReadThread extends Thread {
         }
     }
 }
+
 @Slf4j
 class WriteThread extends Thread {
     private ReentrantReadWriteLock rrwLock;
@@ -53,6 +67,7 @@ class WriteThread extends Thread {
         this.rrwLock = rrwLock;
     }
 
+    @Override
     public void run() {
         log.info(Thread.currentThread().getName() + " trying to lock");
         try {
