@@ -6,6 +6,34 @@ mybatis-plus:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://10.63.38.186:3306/trantor_h3c_prod?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
-    username: h3cmall_prod1
-    password: HT5L2_h5x9M1BR1g32
+    url: jdbc:mysql://192.168.8.168:3306/ccms_test?characterEncoding=UTF-8&serverTimezone=Hongkong&useSSL=true
+    username: dubtest02
+    password: Dubtest_0728
+  redis:
+    host: 192.168.3.131
+    port: 6379
+    database: 18
+    # 连接池最大连接数（使用负值表示没有限制）
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 10
+        min-idle: 0
+        max-wait: -1
+    password: Zjport@0606
+  rabbitmq:
+    host: 192.168.3.18
+    port: 5672
+    username: aliyun
+    password: aliyun@123
+    virtualHost: yibao
+#  dub.rabbitmq.host=192.168.3.18
+#  #dub.rabbitmq.host=121.196.227.45
+#  dub.rabbitmq.port=5672
+#  dub.rabbitmq.username=aliyun
+#  dub.rabbitmq.password=aliyun@123
+#  dub.rabbitmq.vhost=yibao
+server:
+  servlet:
+    context-path: /xixi
+  port: 8081
